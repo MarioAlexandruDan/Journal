@@ -1,8 +1,6 @@
 package logic;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class LogIn {
 
@@ -19,24 +17,16 @@ public class LogIn {
 	 * This method is used for checking if the User name exists, and does something
 	 * after.
 	 */
-	public static void checkForUser() {
+	public static void checkForUser() throws IOException {
 
-		try (BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in))) {
-			String input = bufferReader.readLine();
-			if (input != null) {
-				if (UsersMapping.getUsers().contains(input)) {
-					UsersLogic.chooseOptionForExistentUser(input);
-				} else {
-					System.out.println("Tot e bine" + input);
-				}
-			} else {
-//				throw UserNotFoundException();
-			}
+		String input = null;
+		input = UsersMapping.getInput();
 
-		} catch (IOException e) {
-			e.printStackTrace();
-//			To be continued
+		if (UsersMapping.getUsers().contains(input)) {
+			UsersLogic.chooseOptionForExistentUser(input);
+		} else {
+			UsersLogic.createUserAndJournal(input);
+			UsersLogic.chooseOptionForExistentUser(input);
 		}
-
 	}
 }
