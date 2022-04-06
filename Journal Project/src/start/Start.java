@@ -1,15 +1,16 @@
 package start;
 
-import java.io.IOException;
-
 import logic.LogIn;
+import models.Messages;
+
+import java.io.IOException;
 
 public class Start {
 
 	public static void main(String[] args) throws IOException {
 
-		LogIn.startMessage();
+		Messages.startMessage();
 		LogIn.checkForUser();
-		
+
 	}
 }
