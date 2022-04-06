@@ -19,11 +19,14 @@ public class UserLogic {
 
 	}
 
+	/*
+	 * 
+	 */
 	public static void accessOption(String input, String User) throws IOException {
 
 		if (input.contains("1")) {
 
-			readTheJournal(User);
+			JournalIO.readTheJournal(User);
 
 		} else if (input.contains("2")) {
 
@@ -43,12 +46,6 @@ public class UserLogic {
 	/*
 	 * 
 	 */
-	public static void readTheJournal(String User) {
-
-		JournalIO.readTheJournal(User);
-
-	}
-
 	public static void changeTheJournal(String User) throws IOException {
 
 		Messages.journalOptionsMessage();
@@ -57,15 +54,15 @@ public class UserLogic {
 
 		if (input.contains("1")) {
 
-			updateTheJournal(User);
+			JournalIO.updateTheJournal(User);
 
 		} else if (input.contains("2")) {
 
-			deleteTheJournal(User);
+			JournalIO.deleteTheJournal(User);
 
 		} else if (input.contains("3")) {
 
-			deleteTheUser(User);
+			UserIO.deleteTheUser(User);
 
 		} else if (input.contains("4")) {
 
@@ -78,55 +75,9 @@ public class UserLogic {
 		}
 	}
 
-	public static void updateTheJournal(String User) throws IOException {
-
-		Messages.areYouSureMessage();
-
-		String input = UserIO.getInput();
-
-		if (input.contains("1")) {
-
-			JournalIO.readTheJournal(User);
-
-			System.out.println("\n\n" + Helper.getLocalTimeDateToString() + ",New Entry: " + "\n");
-
-			input = UserIO.getInput();
-
-			JournalIO.updateTheJournal(User,
-					"\n\n" + Helper.getLocalTimeDateToString() + ",New Entry: " + "\n" + input);
-
-		} else if (input.contains("2")) {
-
-			returnToMainMenu(User);
-
-		} else {
-
-			wrongInput(User);
-		}
-
-	}
-
-	public static void deleteTheJournal(String User) throws IOException {
-
-		Messages.areYouSureMessage();
-
-		String input = UserIO.getInput();
-
-		if (input.contains("1")) {
-
-			JournalIO.deleateTheJournal(User);
-
-		} else if (input.contains("2")) {
-
-			returnToMainMenu(User);
-
-		} else {
-
-			wrongInput(User);
-
-		}
-	}
-
+	/*
+	 * 
+	 */
 	public static void returnToMainMenu(String User) throws IOException {
 
 		Messages.returnToMainMenuMessage();
@@ -136,6 +87,9 @@ public class UserLogic {
 		chooseOptionForExistentUser(User);
 	}
 
+	/*
+	 * 
+	 */
 	public static void wrongInput(String User) throws IOException {
 
 		Messages.notValidMessage();
@@ -145,25 +99,29 @@ public class UserLogic {
 		chooseOptionForExistentUser(User);
 	}
 
-	public static void deleteTheUser(String User) throws IOException {
+	/*
+	 * 
+	 */
+	public static void doSomethingElse(String User) throws IOException {
 
-		Messages.areYouSureMessage();
+		Messages.doSomethingElseMessage();
 
 		String input = UserIO.getInput();
 
 		if (input.contains("1")) {
 
-			UserIO.deleteTheUser(User);
+			returnToMainMenu(User);
 
 		} else if (input.contains("2")) {
 
-			returnToMainMenu(User);
+			Messages.programClosedMessage();
 
 		} else {
 
 			wrongInput(User);
 
 		}
+
 	}
 
 }

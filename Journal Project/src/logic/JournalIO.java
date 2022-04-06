@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import models.Messages;
+
 public class JournalIO {
 
 	/*
@@ -28,47 +30,127 @@ public class JournalIO {
 	/*
 	 * This method reads the text from the user
 	 */
-	public static void readTheJournal(String User) {
-		System.out.print("\n");
-		Path path = UserIO.getPath(User).toAbsolutePath();
-		try {
-			byte[] bytes = Files.readAllBytes(path);
-			for (byte b : bytes) {
-				System.out.print((char) b);
+	public static void readTheJournal(String User) throws IOException {
+
+		Messages.areYouSureMessage();
+
+		String input = UserIO.getInput();
+
+		if (input.contains("1")) {
+
+			Path path = UserIO.getPath(User).toAbsolutePath();
+
+			System.out.print("\n");
+
+			try {
+				byte[] bytes = Files.readAllBytes(path);
+				for (byte b : bytes) {
+					System.out.print((char) b);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+//				To be continued
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-//			To be continued
+
+			Helper.makeUserWait();
+
+			UserLogic.doSomethingElse(User);
+
+		} else if (input.contains("2")) {
+
+			UserLogic.returnToMainMenu(User);
+
+		} else {
+
+			UserLogic.wrongInput(User);
+		}
+
+	}
+
+	/*
+	 * 
+	 */
+	public static void updateTheJournal(String User) throws IOException {
+
+		Messages.areYouSureMessage();
+
+		String input = UserIO.getInput();
+
+		if (input.contains("1")) {
+
+			Path path = UserIO.getPath(User).toAbsolutePath();
+
+			System.out.print("\n");
+
+			try {
+				byte[] bytes = Files.readAllBytes(path);
+				for (byte b : bytes) {
+					System.out.print((char) b);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+//				To be continued
+			}
+
+			System.out.println("\n\n" + Helper.getLocalTimeDateToString() + ",New Entry: " + "\n");
+
+			input = "\n\n" + Helper.getLocalTimeDateToString() + ",New Entry: " + "\n" + UserIO.getInput();
+
+			try {
+				Files.write(path, input.getBytes(), StandardOpenOption.APPEND);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+//				To be continued
+			}
+
+			Helper.makeUserWait();
+
+			UserLogic.doSomethingElse(User);
+
+		} else if (input.contains("2")) {
+
+			UserLogic.returnToMainMenu(User);
+
+		} else {
+
+			UserLogic.wrongInput(User);
 		}
 	}
 
 	/*
 	 * 
 	 */
-	public static void updateTheJournal(String User, String newEntry) {
-		Path path = UserIO.getPath(User).toAbsolutePath();
+	public static void deleteTheJournal(String User) throws IOException {
 
-		try {
-			Files.write(path, newEntry.getBytes(), StandardOpenOption.APPEND);
+		Messages.areYouSureMessage();
 
-		} catch (IOException e) {
-			e.printStackTrace();
-//			To be continued
-		}
-	}
+		String input = UserIO.getInput();
 
-	/*
-	 * 
-	 */
-	public static void deleateTheJournal(String User) {
-		Path path = UserIO.getPath(User).toAbsolutePath();
+		if (input.contains("1")) {
 
-		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-			writer.write("");
-			writer.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Path path = UserIO.getPath(User).toAbsolutePath();
+
+			try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+				writer.write("");
+				writer.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Helper.makeUserWait();
+
+			UserLogic.doSomethingElse(User);
+
+		} else if (input.contains("2")) {
+
+			UserLogic.returnToMainMenu(User);
+
+		} else {
+
+			UserLogic.wrongInput(User);
+
 		}
 	}
 }

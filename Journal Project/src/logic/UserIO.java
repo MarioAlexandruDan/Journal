@@ -10,22 +10,45 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Messages;
+
 public class UserIO {
 
 	/*
 	 * 
 	 */
-	public static void deleteTheUser(String User) {
+	public static void deleteTheUser(String User) throws IOException {
 
-		Path path1 = getPath(User).toAbsolutePath();
-		Path path2 = Paths.get("Users\\" + User).toAbsolutePath();
+		Messages.areYouSureMessage();
 
-		try {
-			Files.delete(path1);
-			Files.delete(path2);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String input = UserIO.getInput();
+
+		if (input.contains("1")) {
+
+			Path path1 = getPath(User).toAbsolutePath();
+			Path path2 = Paths.get("Users\\" + User).toAbsolutePath();
+
+			try {
+
+				Files.delete(path1);
+				Files.delete(path2);
+
+			} catch (IOException e) {
+
+				e.printStackTrace();
+
+			}
+
+			Messages.programClosedMessage();
+
+		} else if (input.contains("2")) {
+
+			UserLogic.returnToMainMenu(User);
+
+		} else {
+
+			UserLogic.wrongInput(User);
+
 		}
 	}
 

@@ -47,8 +47,7 @@ public class Messages {
 	 */
 	public static void notValidMessage() {
 
-		System.out.println("\n" + "Are you sure?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n"
-				+ "Please type one of the numbers above." + "\n");
+		System.out.println("\n" + "Sorry, the input wasn't valid! You will be redirected to main menu." + "\n");
 	}
 
 	/*
@@ -56,7 +55,7 @@ public class Messages {
 	 */
 	public static void returnToMainMenuMessage() {
 
-		System.out.println("\n" + "You will be redirected to main menu");
+		System.out.println("\n" + "You will be redirected to main menu.");
 	}
 
 	/*
@@ -65,6 +64,16 @@ public class Messages {
 	public static void programClosedMessage() {
 
 		System.out.println("\n" + "Program closed!");
+
+	}
+
+	/*
+	 * 
+	 */
+	public static void doSomethingElseMessage() {
+
+		System.out.println("\n" + "Would you want to do something else?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n"
+				+ "Please type one of the numbers above." + "\n");
 
 	}
 }
