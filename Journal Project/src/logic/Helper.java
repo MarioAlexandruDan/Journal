@@ -5,8 +5,11 @@ import java.time.LocalTime;
 
 public class Helper {
 
-	/*
+	/**
+	 * This method gets the Local Time Date of the current machine.
 	 * 
+	 * @return String This returns the formated String of the desired information
+	 *         about the Local Time Date
 	 */
 	public static String getLocalTimeDateToString() {
 
@@ -20,14 +23,19 @@ public class Helper {
 		return "Date(" + day + "/" + month + "/" + year + "),Time(" + hour + ":" + minute + ":" + second + ")";
 	}
 
-	/*
+	/**
+	 * This method makes the program sleep for 1000 milliseconds.
 	 * 
+	 * @exception InterruptedException On Interruption error
+	 * @see InterruptedException
 	 */
 	public static void makeUserWait() {
+
 		try {
+
 			Thread.sleep(1000);
+
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
